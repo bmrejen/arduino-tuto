@@ -1,16 +1,19 @@
-int readPin = A2;
-int readVal;
+float voltage;
 float V2;
-int waitTime = 250;
 
-void setup() {
+void setup()
+{
+  pinMode(A7, INPUT);
+  pinMode(13, OUTPUT);
   Serial.begin(9600);
-
 }
 
-void loop() {
-  readVal = analogRead(readPin);
-  V2 = 5./1023.*readVal;
+void loop()
+{
+  voltage = analogRead(A7);
+  V2 = voltage/1023.*255.;
+  
   Serial.println(V2);
-  delay(waitTime);
+  analogWrite(13, V2);
+  delay(1000);
 }
